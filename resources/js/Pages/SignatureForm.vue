@@ -26,12 +26,45 @@ function undo(){
     signaturePad.value.undoSignature();
 }
 
-const image = new Image();
+
 function save(){
-    const { isEmpty, data } = signaturePad.value.saveSignature();
-    const test = signaturePad.value.fromDataURL(data);
-    console.log(test);
+    if (signaturePad.value.isEmpty()) {
+        alert("Please provide a signature first.");
+  } else {
+    const { data } = signaturePad.value.saveSignature();
+    download(data, "signature.png");
+  }
 }   
+
+function download(dataURL, filename) {
+  var blob = dataURLToBlob(dataURL);
+  var url = window.URL.createObjectURL(blob);
+
+  var a = document.createElement("a");
+  a.style = "display: none";
+  a.href = url;
+  a.download = filename;
+
+  document.body.appendChild(a);
+  a.click();
+
+  window.URL.revokeObjectURL(url);
+}
+
+function dataURLToBlob(dataURL) {
+  // Code taken from https://github.com/ebidel/filer.js
+  var parts = dataURL.split(';base64,');
+  var contentType = parts[0].split(":")[1];
+  var raw = window.atob(parts[1]);
+  var rawLength = raw.length;
+  var uInt8Array = new Uint8Array(rawLength);
+
+  for (var i = 0; i < rawLength; ++i) {
+    uInt8Array[i] = raw.charCodeAt(i);
+  }
+
+  return new Blob([uInt8Array], { type: contentType });
+}
 
 
 const form = useForm({

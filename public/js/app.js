@@ -21568,15 +21568,44 @@ __webpack_require__.r(__webpack_exports__);
       signaturePad.value.undoSignature();
     }
 
-    var image = new Image();
-
     function save() {
-      var _signaturePad$value$s = signaturePad.value.saveSignature(),
-          isEmpty = _signaturePad$value$s.isEmpty,
-          data = _signaturePad$value$s.data;
+      if (signaturePad.value.isEmpty()) {
+        alert("Please provide a signature first.");
+      } else {
+        var _signaturePad$value$s = signaturePad.value.saveSignature(),
+            data = _signaturePad$value$s.data;
 
-      var test = signaturePad.value.fromDataURL(data);
-      console.log(test);
+        download(data, "signature.png");
+      }
+    }
+
+    function download(dataURL, filename) {
+      var blob = dataURLToBlob(dataURL);
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.style = "display: none";
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    function dataURLToBlob(dataURL) {
+      // Code taken from https://github.com/ebidel/filer.js
+      var parts = dataURL.split(';base64,');
+      var contentType = parts[0].split(":")[1];
+      var raw = window.atob(parts[1]);
+      var rawLength = raw.length;
+      var uInt8Array = new Uint8Array(rawLength);
+
+      for (var i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+
+      return new Blob([uInt8Array], {
+        type: contentType
+      });
     }
 
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
@@ -21593,8 +21622,9 @@ __webpack_require__.r(__webpack_exports__);
     var __returned__ = {
       signaturePad: signaturePad,
       undo: undo,
-      image: image,
       save: save,
+      download: download,
+      dataURLToBlob: dataURLToBlob,
       form: form,
       submit: submit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
