@@ -30,26 +30,12 @@ function undo(){
 function save(){
     if (signaturePad.value.isEmpty()) {
         alert("Please provide a signature first.");
-  } else {
-    const { data } = signaturePad.value.saveSignature();
-    download(data, "signature.png");
-  }
+    } else {
+        const { data } = signaturePad.value.saveSignature();
+        const blob = dataURLToBlob(data);
+        form.signature = blob;
+    }
 }   
-
-function download(dataURL, filename) {
-  var blob = dataURLToBlob(dataURL);
-  var url = window.URL.createObjectURL(blob);
-
-  var a = document.createElement("a");
-  a.style = "display: none";
-  a.href = url;
-  a.download = filename;
-
-  document.body.appendChild(a);
-  a.click();
-
-  window.URL.revokeObjectURL(url);
-}
 
 function dataURLToBlob(dataURL) {
   // Code taken from https://github.com/ebidel/filer.js
@@ -69,7 +55,7 @@ function dataURLToBlob(dataURL) {
 
 const form = useForm({
     name: null,
-    avatar: null,
+    signature: null,
 })
 
 

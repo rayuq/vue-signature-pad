@@ -21575,20 +21575,9 @@ __webpack_require__.r(__webpack_exports__);
         var _signaturePad$value$s = signaturePad.value.saveSignature(),
             data = _signaturePad$value$s.data;
 
-        download(data, "signature.png");
+        var blob = dataURLToBlob(data);
+        form.signature = blob;
       }
-    }
-
-    function download(dataURL, filename) {
-      var blob = dataURLToBlob(dataURL);
-      var url = window.URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.style = "display: none";
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
     }
 
     function dataURLToBlob(dataURL) {
@@ -21610,7 +21599,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
       name: null,
-      avatar: null
+      signature: null
     });
 
     function submit() {
@@ -21623,7 +21612,6 @@ __webpack_require__.r(__webpack_exports__);
       signaturePad: signaturePad,
       undo: undo,
       save: save,
-      download: download,
       dataURLToBlob: dataURLToBlob,
       form: form,
       submit: submit,

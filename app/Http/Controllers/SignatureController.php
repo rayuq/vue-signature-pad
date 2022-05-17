@@ -35,9 +35,8 @@ class SignatureController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-    //    $img = base64_decode($request['avatar']);
-       return $request->file('avatar')->store('images', ['disk' => 'public_uploads']);
+        // dd($request);
+       return $request->file('signature')->store('signature_images');
     }
 
     /**
