@@ -14,13 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return inertia('Welcome');
-});
+// Route::get('/', function () {
+//     return inertia('Welcome');
+// });
 
-Route::get('/signature', function () {
+Route::get('/', function () {
     return inertia('SignatureForm');
 });
+
+// Route::get('/signature/gallery', function () {
+//     return inertia('SignatureGallery');
+// });
+
+Route::get('/signature/gallery',[SignatureController::class, 'index'])->name('gallery');
 Route::post('/signature/store',[SignatureController::class, 'store'])->name('upload');
     
     
