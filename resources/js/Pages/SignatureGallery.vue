@@ -2,7 +2,7 @@
     <section>
         <div class="p-6">
             <div class="flex justify-center">
-                <h1 class="font-semibold">Signature Gallery</h1>
+                <h1 class="font-semibold text-2xl">Signature Gallery</h1>
             </div>
             <div class="pt-8 flex justify-center">
                 <div class="grid grid-cols-4 gap-4">
@@ -14,7 +14,7 @@
             </div>
             <div class="pt-36 flex justify-center">
                 <div>
-                    <Link href="/" class="underline hover:text-blue-500">Back</Link>
+                    <Link href="/" class="text-lg underline hover:text-blue-500">Back</Link>
                 </div>
             </div>
         </div>

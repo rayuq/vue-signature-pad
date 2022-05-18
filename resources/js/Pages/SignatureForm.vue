@@ -3,7 +3,7 @@
         <div class="bg-slate-100 h-screen">
             <div class="p-6 flex justify-center">
                 <div>
-                    <h1 class="text-2xl">Signature Page</h1>
+                    <h1 class="font-semibold text-2xl">Signature Page</h1>
                 </div>
             </div>
             <div class="flex justify-center">
