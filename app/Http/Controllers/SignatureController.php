@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Signature;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class SignatureController extends Controller
 {
@@ -14,7 +16,9 @@ class SignatureController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('SignatureGallery', [
+            'images' => Signature::select('image')->get(),
+        ]);
     }
 
     /**
@@ -36,7 +40,18 @@ class SignatureController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-       return $request->file('signature')->store('signature_images');
+        $validated = $request->validate([
+            'image' => 'image|file|max:1024'
+        ]);
+
+        if($request->file('signature')){
+            $validated['image'] = $request->file('signature')->store('signature_images');
+            Signature::create($validated);
+            dd('success');
+        }
+        else{
+            dd('error');
+        }
     }
 
     /**
