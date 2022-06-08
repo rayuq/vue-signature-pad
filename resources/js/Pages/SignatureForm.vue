@@ -12,7 +12,6 @@
                         <VueSignaturePad v-model="form.avatar" width="300px" height="300px" ref="signaturePad" class="border border-black shadow-md" />
                         <!-- <input type="file" @input="form.avatar = $event.target.files[0]" /> -->
                     </div>
-                    <!-- <input type="file" > -->
                     <div class="px-4 flex flex-wrap mx-auto justify-end">
                         <button type="submit" @click="save" class="bg-green-500 font-medium px-3 py-1 rounded-md text-white hover:bg-green-600 transition-colors">Save</button>
                         <button type="button" @click="undo" class="ml-2 bg-red-500 font-medium px-3 py-1 rounded-md text-white hover:bg-red-600 transition-colors">Undo</button>
